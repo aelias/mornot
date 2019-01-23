@@ -1,0 +1,12 @@
+language: go
+
+go:
+  - "1.11.x"
+
+services:
+  - docker
+
+before_install:
+  - docker pull golang
+  - docker build -t mutantornot -f mutantornot/Dockerfile .
+  - docker build -t dnastats -f dnastats/Dockerfile .
