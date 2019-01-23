@@ -59,7 +59,3 @@ func TestValidMatrix(t *testing.T) {
 	}
 
 }
-
-func TestForFail(t *testing.T) {
-	t.Error("This test is supposed to fail")
-}
