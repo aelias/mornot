@@ -5,3 +5,7 @@ go:
 
 services:
   - docker
+
+  script:
+     - docker run mutantornot bash -c "go test ./... -v"
+     - docker run dnastats bash -c "go test ./... -v"
