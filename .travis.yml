@@ -5,8 +5,3 @@ go:
 
 services:
   - docker
-
-before_install:
-  - docker pull golang
-  - docker build -t mutantornot -f mutantornot/Dockerfile .
-  - docker build -t dnastats -f dnastats/Dockerfile .
