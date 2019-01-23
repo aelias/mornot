@@ -3,7 +3,10 @@ FROM golang:latest
 RUN go get github.com/gin-gonic/gin
 RUN go get github.com/streadway/amqp
 
+# Environment variables
 # ENV GIN_MODE=release
+ENV RABBIT_CONN_STRING=amqp://guest:guest@rabbitmq:5672
+
 RUN mkdir -p /go/src/meli/mutantornot
 WORKDIR /go/src/meli/mutantornot
 
