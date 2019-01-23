@@ -2,7 +2,7 @@ MUTANTORNOT_IMAGE_NAME=mutantornot
 DNASTATS_IMAGE_NAME=dnastats
 
 # Build and run containers
-all: docker docker-test docker-run
+all: docker docker-test
 
 # Build both containers
 docker:
