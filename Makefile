@@ -11,8 +11,8 @@ docker:
 
 # Running tests
 docker-test:
-		# docker run $(MUTANTORNOT_IMAGE_NAME) bash -c "go test ./... -v"
-		# docker run $(DNASTATS_IMAGE_NAME) bash -c "go test ./... -v"
+		docker run $(MUTANTORNOT_IMAGE_NAME) bash -c "go test ./... -v"
+		docker run $(DNASTATS_IMAGE_NAME) bash -c "go test ./... -v"
 
 # Run both containers in deatached mode
 docker-run:
