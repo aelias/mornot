@@ -3,6 +3,8 @@ package rabbit
 import (
 	"encoding/json"
 	"log"
+	"os"
+	"time"
 
 	"github.com/streadway/amqp"
 )
@@ -13,13 +15,26 @@ type DnaMessage struct {
 	Dna      []string
 }
 
+var rabbitConnString string
 var conn *amqp.Connection
 var ch *amqp.Channel
 var queue amqp.Queue
 var err error
 
 func init() {
-	conn, err = amqp.Dial("amqp://guest:guest@localhost:5672")
+	rabbitConnString = os.Getenv("RABBIT_CONN_STRING")
+	if rabbitConnString == "" {
+		rabbitConnString = "amqp://guest:guest@localhost:5672"
+	}
+	conn, err = amqp.Dial(rabbitConnString)
+	// Retry if the rabbitmq server is not up and running
+	retries := 0
+	for err != nil && retries < 10 {
+		time.Sleep(5 * time.Second)
+		conn, err = amqp.Dial(rabbitConnString)
+		retries++
+		logOnError(err, "Failed to connect. Retrying: ")
+	}
 	failOnError(err, "Failed to connect to RabbitMQ")
 	// defer conn.Close()
 	ch, err = conn.Channel()
@@ -39,6 +54,10 @@ func failOnError(err error, msg string) {
 	if err != nil {
 		log.Fatalf("%s: %s", msg, err)
 	}
+}
+
+func logOnError(err error, msg string) {
+	log.Printf("%s: %s", msg, err)
 }
 
 // Publish a message in the queue

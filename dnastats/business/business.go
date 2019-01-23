@@ -4,6 +4,7 @@ import (
 	"log"
 	"meli/dnastats/model"
 	"meli/rabbit"
+	"os"
 	"sync"
 
 	mgo "gopkg.in/mgo.v2"
@@ -18,16 +19,21 @@ const (
 
 // MongoDB constants
 var saveMutex sync.Mutex
+var mongoDbConnString string
 var mongoSession *mgo.Session
 var dnaMongoCol *mgo.Collection
 
 func init() {
+	mongoDbConnString = os.Getenv("MONGO_CONN_STRING")
+	if mongoDbConnString == "" {
+		mongoDbConnString = "localhost"
+	}
 	// Initialize mongodb
 	log.Println("Initialize module business")
 	saveMutex = sync.Mutex{}
 
 	var err error
-	mongoSession, err = mgo.Dial("localhost")
+	mongoSession, err = mgo.Dial(mongoDbConnString)
 	if err != nil {
 		panic(err)
 	}
