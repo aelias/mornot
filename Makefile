@@ -4,7 +4,7 @@ DNASTATS_IMAGE_NAME=dnastats
 DOCKER_USER=${docker_user_env}
 
 # Build and run containers
-all: docker docker-test
+all: docker-build docker-test
 
 # Build both containers
 docker-build:
