@@ -1,6 +1,12 @@
 version: '3'
 
 services:
+  mnginx:
+    build:
+      dockerfile: ./mnginx/Dockerfile
+      context: .
+    ports:
+      - "80:80"
   mongodb:
     image: mongo
     ports:
