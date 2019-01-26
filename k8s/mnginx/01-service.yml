@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mnginx
+  labels:
+    app: mnginx
+spec:
+  ports:
+  - name: "mnginx"
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: mnginx
+  type: LoadBalancer

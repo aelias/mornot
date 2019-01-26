@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mutant
+  labels:
+    app: mutant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mutant
+  template:
+    metadata:
+      labels:
+        app: mutant
+    spec:
+      containers:
+      - image: aelias/mutantornot
+        name: mutant
+        resources:
+            limits:
+              memory: "32Mi"
+              cpu: "200m"        
+        env:
+          - name: RABBIT_CONN_STRING
+            value: "amqp://guest:guest@rabbitmq:5672"
+        ports:
+        - name: mutant
+          containerPort: 8081
+          protocol: TCP

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mnginx
+  labels:
+    app: mnginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mnginx
+  template:
+    metadata:
+      labels:
+        app: mnginx
+    spec:
+      containers:
+      - image: aelias/mnginx
+        name: mnginx
+        resources:
+            limits:
+              memory: "32Mi"
+              cpu: "200m"        
+        ports:
+        - name: mnginx
+          containerPort: 80
+          protocol: TCP
+

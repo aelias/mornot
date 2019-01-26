@@ -1,12 +1,6 @@
 version: '3'
 
 services:
-  mnginx:
-    build:
-      dockerfile: ./mnginx/Dockerfile
-      context: .
-    ports:
-      - "80:80"
   mongodb:
     image: mongo
     ports:
@@ -14,15 +8,19 @@ services:
   rabbitmq:
     image: rabbitmq
     hostname: rabbitmq
-    # environment:
-    #   RABBITMQ_DEFAULT_USER: "meli"
-    #   RABBITMQ_DEFAULT_PASS: "meli"
-    #   RABBITMQ_DEFAULT_VHOST: "/"
     ports:
       - "5672:5672"
       - "15672:15672"
-
-  mutantornot:
+  mnginx:
+    build:
+      dockerfile: ./mnginx/Dockerfile
+      context: .
+    ports:
+      - "80:80"
+    depends_on:
+      - mutant
+      - dna
+  mutant:
     build:
       dockerfile: ./mutantornot/Dockerfile
       context: .
@@ -33,7 +31,7 @@ services:
       - rabbitmq
     links:
       - rabbitmq
-  dnastats:
+  dna:
     build: 
       dockerfile: ./dnastats/Dockerfile
       context: .
