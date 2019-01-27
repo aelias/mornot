@@ -16,6 +16,9 @@ docker-build:
 
 docker-run:
 	docker-compose up -d
+	@echo "Pause for wait docker is running"
+	sleep 10
+	@echo "Continuing"
 
 docker-stop:
 	docker-compose stop
