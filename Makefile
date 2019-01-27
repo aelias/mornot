@@ -5,7 +5,7 @@ MNGINX_IMAGE_NAME=mnginx
 DOCKER_USER=${docker_user_env}
 
 # Build run and test solution
-all: docker-build docker-run docker-test
+all: docker-build docker-run docker-test docker-stop
 
 # Build both containers
 docker-build:
@@ -16,6 +16,9 @@ docker-build:
 
 docker-run:
 	docker-compose up -d
+
+docker-stop:
+	docker-compose stop
 
 # Running tests
 docker-test:
