@@ -11,7 +11,12 @@ import (
 // HandlePOSTMutant receive POST call to /mutant/
 func HandlePOSTMutant(ctx *gin.Context) {
 	var dna container.DnaMatrix
-	ctx.BindJSON(&dna)
+	//ctx.BindJSON(&dna)
+	if err := ctx.ShouldBindJSON(&dna); err != nil {
+		ctx.JSON(404, "Invalid request")
+		return
+	}
+
 	isMutant, err := util.IsMutant(dna.Dna)
 	if err != nil {
 		ctx.JSON(404, "The DNA matrix is invalid")

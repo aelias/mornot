@@ -3,6 +3,7 @@ FROM golang:latest
 RUN go get github.com/gin-gonic/gin
 RUN go get github.com/streadway/amqp
 RUN go get gopkg.in/mgo.v2
+RUN	go get github.com/dghubble/sling
 
 # Environment variables
 # ENV GIN_MODE=release

@@ -30,7 +30,6 @@ func init() {
 	}
 	// Initialize mongodb
 	log.Println("Initialize module business")
-	saveMutex = sync.Mutex{}
 
 	var err error
 	mongoSession, err = mgo.Dial(mongoDbConnString)
@@ -52,7 +51,6 @@ func init() {
 
 // SaveDNAIfNotExists save the dna in the database checking if it exists
 func SaveDNAIfNotExists(dnaMessage rabbit.DnaMessage) {
-	saveMutex.Lock()
 	// Prepare the record to be added
 	var dnaModel model.DnaMatrix
 	dnaModel.IsMutant = dnaMessage.IsMutant
@@ -64,26 +62,7 @@ func SaveDNAIfNotExists(dnaMessage rabbit.DnaMessage) {
 	} else {
 		log.Printf("Saved DNA: %v\n", dnaModel)
 	}
-	// Free mutex
-	saveMutex.Unlock()
 }
-
-// SaveDNAIfNotExists save the dna in the database checking if it exists
-// func SaveDNAIfNotExists(isMutant bool, container container.DnaMatrix) {
-// 	// Only one dna can be saved at the same time, for ensure uniqueness
-// 	saveMutex.Lock()
-// 	// Prepare the record to be added
-// 	dnaModel := model.NewFromContainer(isMutant, container)
-// 	// Save the record
-// 	err := dnaMongoCol.Insert(dnaModel)
-// 	if err != nil {
-// 		log.Println(err)
-// 	} else {
-// 		log.Printf("Saved DNA: %v\n", dnaModel)
-// 	}
-// 	// Free mutex
-// 	saveMutex.Unlock()
-// }
 
 // GetDNAStats returns the amount of mutant and human DNA in the collection
 func GetDNAStats() (mutants int, humans int, ratio float64) {

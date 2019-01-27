@@ -3,7 +3,6 @@ package model
 import (
 	"crypto/md5"
 	"encoding/hex"
-	"encoding/json"
 	"meli/dnastats/container"
 )
 
@@ -12,12 +11,6 @@ type DnaMatrix struct {
 	IsMutant bool     `bson:"is_mutant"`
 	UniqueID string   `bson:"unique_id"`
 	Dna      []string `bson:"dna"`
-}
-
-// LoadFromContainer loads the model from a given container
-func (dnaMatrix *DnaMatrix) LoadFromContainer(container container.DnaMatrix) {
-	dnaMatrix.Dna = container.Dna
-	dnaMatrix.UniqueID = dnaMatrix.GetUniqueID()
 }
 
 // NewFromContainer creates a new DnaMatrix model from a given container
@@ -37,12 +30,5 @@ func (dnaMatrix *DnaMatrix) GetUniqueID() (uniqueID string) {
 	}
 	uniqueID = hex.EncodeToString(hash.Sum(nil))
 	dnaMatrix.UniqueID = uniqueID
-	return
-}
-
-// Serialize return the struct converted to a string for being saved in the database
-func (dnaMatrix *DnaMatrix) Serialize() (serialized string) {
-	hash, _ := json.Marshal(dnaMatrix)
-	serialized = string(hash)
 	return
 }

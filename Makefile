@@ -4,19 +4,25 @@ MNGINX_IMAGE_NAME=mnginx
 # You have to export your docker user name
 DOCKER_USER=${docker_user_env}
 
-# Build and run containers
-all: docker-build docker-test
+# Build run and test solution
+all: docker-build docker-run docker-test
 
 # Build both containers
 docker-build:
 		docker build -t $(MUTANTORNOT_IMAGE_NAME) -f mutantornot/Dockerfile .
 		docker build -t $(DNASTATS_IMAGE_NAME) -f dnastats/Dockerfile .
 		docker build -t $(MNGINX_IMAGE_NAME) -f mnginx/Dockerfile .
+		docker-compose build
+
+docker-run:
+	docker-compose up -d
 
 # Running tests
 docker-test:
-		docker run $(MUTANTORNOT_IMAGE_NAME) bash -c "go test ./... -v"
-		docker run $(DNASTATS_IMAGE_NAME) bash -c "go test ./... -v"
+		# docker run $(MUTANTORNOT_IMAGE_NAME) bash -c "go test ./... -v"
+		# docker run $(DNASTATS_IMAGE_NAME) bash -c "go test ./... -v"
+		docker-compose exec mutant bash -c "go test ./... -v"
+		docker-compose exec dna bash -c "go test ./... -v"
 
 # Tag and push images to docker registry
 docker-push: docker-build

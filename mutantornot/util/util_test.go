@@ -19,7 +19,7 @@ func TestSearchCoincidencesGoodString(t *testing.T) {
 
 func TestHumanDNA(t *testing.T) {
 	// With
-	dnaHumanSample := []string{"AAAAG", "CBCBB", "TGTGT", "HHHHH", "GGTTT"}
+	dnaHumanSample := []string{"AAAAG", "CTCTT", "TGTGT", "ATATA", "GGTTT"}
 	// Do
 	if isMutant, _ := IsMutant(dnaHumanSample); isMutant {
 		t.Error("DNA sample is not from a mutant")
@@ -55,6 +55,14 @@ func TestNotValidMatrixNoDNA(t *testing.T) {
 func TestValidMatrix(t *testing.T) {
 	invalidMatrix := []string{"AAA", "TTT", "CCC"}
 	if !isValidDNAMatrix(invalidMatrix) {
+		t.Error("Matrix is not a valid one!")
+	}
+
+}
+
+func TestInvalidSize(t *testing.T) {
+	invalidMatrix := []string{"AAA", "TTT", "CCC"}
+	if _, err := IsMutant(invalidMatrix); err == nil {
 		t.Error("Matrix is not a valid one!")
 	}
 
