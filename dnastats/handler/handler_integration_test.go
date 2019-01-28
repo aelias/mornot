@@ -30,7 +30,6 @@ func TestHandlerGETStats(t *testing.T) {
 	}
 
 	body, _ := ioutil.ReadAll(resp.Body)
-	// message := string(body)
 	stats := &container.Stat{}
 	err = json.Unmarshal(body, &stats)
 	if err != nil {

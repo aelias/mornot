@@ -56,6 +56,4 @@ POST http://localhost/mutant
 
 For remote testing:
 ===================
-Both examples are valid for remote testing as well. You just need to consider
-the correct IP for the API endpoints.
-`http://35.222.190.249/stats` or `http://35.222.190.249/mutant`
+Remote links will be provided in the PDF documentation

@@ -20,3 +20,6 @@ deps:
 		$(GOGET) gopkg.in/mgo.v2
 		# rabbitmq
 		$(GOGET) github.com/streadway/amqp
+		# For making requests
+		$(GOGET) github.com/dghubble/sling
+

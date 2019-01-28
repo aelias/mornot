@@ -18,3 +18,6 @@ deps:
 		$(GOGET) github.com/gin-gonic/gin
 		# rabbitmq
 		$(GOGET) github.com/streadway/amqp
+		# For making requests
+		$(GOGET) github.com/dghubble/sling
+
