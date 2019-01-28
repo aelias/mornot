@@ -13,7 +13,7 @@ func TestMutantHandlerNotMutantDNA(t *testing.T) {
 	body := container.DnaMatrix{
 		Dna: []string{"ATGC", "TAGC", "CCCC", "GGGG"},
 	}
-	req, err := sling.New().Post("http://localhost:8081/mutant").BodyJSON(body).Request()
+	req, err := sling.New().Post("http://localhost/mutant").BodyJSON(body).Request()
 	if err != nil {
 		log.Printf("%v", err)
 	}
@@ -33,7 +33,7 @@ func TestMutantHandlerMutantDNA(t *testing.T) {
 	body := container.DnaMatrix{
 		Dna: []string{"ATGC", "TTTT", "CCCC", "GGGG"},
 	}
-	req, err := sling.New().Post("http://localhost:8081/mutant").BodyJSON(body).Request()
+	req, err := sling.New().Post("http://localhost/mutant").BodyJSON(body).Request()
 	if err != nil {
 		log.Printf("%v", err)
 	}
@@ -53,7 +53,7 @@ func TestMutantHandlerInvalidMatrix(t *testing.T) {
 	body := container.DnaMatrix{
 		Dna: []string{"ATG", "TTT", "CCC", "GGG"},
 	}
-	req, err := sling.New().Post("http://localhost:8081/mutant").BodyJSON(body).Request()
+	req, err := sling.New().Post("http://localhost/mutant").BodyJSON(body).Request()
 	if err != nil {
 		log.Printf("%v", err)
 	}
@@ -79,7 +79,7 @@ func TestMutantHandlerInvalidRequest(t *testing.T) {
 		NotValid: "",
 	}
 
-	req, err := sling.New().Post("http://localhost:8081/mutant").BodyJSON(body).Request()
+	req, err := sling.New().Post("http://localhost/mutant").BodyJSON(body).Request()
 	if err != nil {
 		log.Printf("%v", err)
 	}

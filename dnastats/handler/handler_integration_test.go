@@ -13,7 +13,7 @@ import (
 
 func TestHandlerGETStats(t *testing.T) {
 
-	req, err := sling.New().Get("http://localhost:8082/stats").Request()
+	req, err := sling.New().Get("http://localhost/stats").Request()
 	if err != nil {
 		log.Printf("%v", err)
 	}

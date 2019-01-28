@@ -4,6 +4,7 @@ import (
 	"log"
 	"meli/dnastats/business"
 	"meli/dnastats/container"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,6 +18,6 @@ func HandleGETStats(ctx *gin.Context) {
 		Ratio:   ratio,
 	}
 	log.Printf("Stats: %d, %d, %f", mutants, humans, ratio)
-	ctx.JSON(200, statCon)
+	ctx.JSON(http.StatusOK, statCon)
 
 }

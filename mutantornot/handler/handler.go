@@ -4,6 +4,7 @@ import (
 	"meli/mutantornot/container"
 	"meli/mutantornot/util"
 	"meli/rabbit"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,20 +13,20 @@ import (
 func HandlePOSTMutant(ctx *gin.Context) {
 	var dna container.DnaMatrix
 	if err := ctx.ShouldBindJSON(&dna); err != nil {
-		ctx.JSON(404, "Invalid request")
+		ctx.JSON(http.StatusNotFound, "Invalid request")
 		return
 	}
 
 	isMutant, err := util.IsMutant(dna.Dna)
 	if err != nil {
-		ctx.JSON(404, "The DNA matrix is invalid")
+		ctx.JSON(http.StatusNotFound, "The DNA matrix is invalid")
 		return
 	}
 
 	if isMutant {
-		ctx.JSON(200, "The DNA is a mutant one")
+		ctx.JSON(http.StatusOK, "The DNA is a mutant one")
 	} else {
-		ctx.JSON(403, "The DNA is NOT mutant")
+		ctx.JSON(http.StatusForbidden, "The DNA is NOT mutant")
 	}
 
 	// Publish the message in async mode
