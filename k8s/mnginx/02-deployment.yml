@@ -15,7 +15,7 @@ spec:
         app: mnginx
     spec:
       containers:
-      - image: aelias/mnginx
+      - image: aelias/mnginx:1.0.0
         name: mnginx
         resources:
             limits:
