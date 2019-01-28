@@ -15,7 +15,7 @@ spec:
         app: mutant
     spec:
       containers:
-      - image: aelias/mutantornot
+      - image: aelias/mutantornot:1.0.0
         name: mutant
         resources:
             limits:

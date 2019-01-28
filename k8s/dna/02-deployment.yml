@@ -15,7 +15,7 @@ spec:
         app: dna
     spec:
       containers:
-      - image: aelias/dnastats
+      - image: aelias/dnastats:1.0.0
         name: dna
         resources:
             limits:
