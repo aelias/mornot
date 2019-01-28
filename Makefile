@@ -25,8 +25,6 @@ docker-stop:
 
 # Running tests
 docker-test:
-		# docker run $(MUTANTORNOT_IMAGE_NAME) bash -c "go test ./... -v"
-		# docker run $(DNASTATS_IMAGE_NAME) bash -c "go test ./... -v"
 		docker-compose exec mutant bash -c "go test ./... -v"
 		docker-compose exec dna bash -c "go test ./... -v"
 
