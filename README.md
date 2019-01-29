@@ -54,6 +54,10 @@ POST http://localhost/mutant
 3. 404 - The DNA matrix is invalid
 4. 404 - Invalid request (the POST body is not formed properly)
 
+*(NOTE: The dna matrix has to be a NxN matrix with N >= 4, the posible
+letters can be only `A`, `C`, `G` and `T`. The API is case sensitive, so
+`a` is not the same than `A`, and `a` is an invalid input.)*
+
 For remote testing:
 ===================
 Remote links will be provided in the PDF documentation
